@@ -1,0 +1,33 @@
+{
+  "Rota name": "Example",
+  "Roles": ["Leader", "Helper 1", "Helper 2"],
+  "Dates": [
+    "1 Oct", "8 Oct", "15 Oct", "22 Oct", "29 Oct"
+  ],
+  "Volunteers": {
+    "Adam": {
+      "Roles" : ["Leader", "Helper 1", "Helper 2"],
+      "Availability" : ["1 Oct", "15 Oct", "22 Oct", "29 Oct"]
+    },
+    "Beth": {
+      "Roles" : ["Leader", "Helper 1", "Helper 2"],
+      "Availability" : ["1 Oct", "8 Oct", "15 Oct"]
+    },
+    "Charlie": {
+      "Roles" : ["Helper 1", "Helper 2"],
+      "Availability" : ["1 Oct", "8 Oct", "22 Oct"]
+    },
+    "Dave": {
+      "Roles" : ["Helper 1", "Helper 2"],
+      "Availability" : ["8 Oct", "15 Oct", "22 Oct", "29 Oct"]
+    },
+    "Erin": {
+      "Roles" : ["Helper 1", "Helper 2"],
+      "Availability" : ["1 Oct", "8 Oct", "15 Oct", "22 Oct", "29 Oct"]
+    },
+    "Fred": {
+      "Roles" : ["Helper 2"],
+      "Availability" : ["8 Oct", "15 Oct", "22 Oct", "29 Oct"]
+    }
+  }
+}
