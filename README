@@ -1,0 +1,18 @@
+# Rota Manager
+
+A simple constraint solver for making rotas.
+
+An example input data is in example.rota
+
+To use, clone the repo, then: 
+```
+source sourceme
+python3 main.py
+```
+
+When finished run
+```
+deactivate
+```
+or restore the terminal environment
+
