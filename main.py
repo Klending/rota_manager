@@ -46,15 +46,15 @@ class RotaTemplate:
     def add_role(self, role: str):
         self.roles.append(role)
         for person in self.alloc.values():
-            person.insert({role, False})
+            person[role] = False
 
 class RotaTemplateSheet:
     def __init__(self, parent, names=None, roles=None):
         self.rT = RotaTemplate(names, roles)
         self.parent = parent
         self.sheet = Sheet(parent,
-            header=copy(roles),
-            index=copy(names),
+            header=roles,
+            index=names,
             theme="light green",
             width=600,
             height=240
@@ -64,15 +64,43 @@ class RotaTemplateSheet:
 
     def add_name(self, name):
         self.rT.add_name(name)
-        self.sheet.insert_row([name], row_index=True)
+        self.sheet.insert_row_position()
+        self.sheet.set_index_data(self.rT.names)
+        self.sheet.pack()
+
+    def add_role(self, name):
+        self.rT.add_role(name)
+        self.sheet.insert_column_position()
+        self.sheet.set_header_data(self.rT.roles)
         self.sheet.pack()
 
 class RotaTab(Tab):
     def draw(self):
         names = ["Adam", "Beth", "Charlie", "Dave"]
-        self.addName = Button(text="Add Name")
-        self.rts = RotaTemplateSheet(self.parent, names)
+        self.addNameButton = Button(self.tab, text="Add Name")
+        self.addNameButton.pack()
         
+        self.addNameEntry = ttk.Entry(self.tab)
+        self.addNameEntry.pack()
+        
+        self.addRoleButton = Button(self.tab, text="Add Role")
+        self.addRoleButton.pack()
+        
+        self.addRoleEntry = ttk.Entry(self.tab)
+        self.addRoleEntry.pack()
+        
+        self.rts = RotaTemplateSheet(self.parent, names)
+        self.addNameButton.bind("<Button>", self.add_name)
+        self.addRoleButton.bind("<Button>", self.add_role)
+
+    def add_name(self, *args):
+        name = self.addNameEntry.get()
+        self.rts.add_name(name)
+
+    def add_role(self, *args):
+        role = self.addRoleEntry.get()
+        self.rts.add_role(role)
+
 class Window(Tk):
     def __init__(self):
         super().__init__()
