@@ -14,5 +14,25 @@ When finished run
 ```
 deactivate
 ```
-or restore the terminal environment
+to restore the terminal environment
 
+## GUI
+
+Three tabs: Rota, Availability, Results
+
+### Rota
+Here users will be able to create or load a rota template, consisting of names, roles and constraints.
+
+They will also be able to add or remove names, roles, and constraints, such as who can do what role.
+
+### Availability
+Here users will be able to load an availability table created perhaps by a google form
+
+### Results
+On this tab will be a 'Generate' button. When clicked, this button will generate a rota using the constraint solver, based on the roles and availability provided in the other two tabs. The resulting rota will be shown, with the option to regenerate to find another solution if undesirable.
+
+When ready, the user will be able to export this to a file to be shared. 
+
+## Potential future features
+ * The ability to select which roles to show in the final rota, so that a master rota can be generated, with consistency across the whole rota, but only a subsection of roles printed out (for example just the music team). 
+ * The ability to leave certain locations empty if overall it produces a better rota, or to allow someone to manually add people into gaps. 
