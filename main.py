@@ -60,6 +60,8 @@ class RotaTemplateSheet:
             width=600,
             height=240
         )
+        self.sheet.span().checkbox(edit_data=True)
+        #click_checkbox(self.sheet["A1"], True)
         self.sheet.enable_bindings()
         self.sheet.grid(row=2, column=0, columnspan=4)
 
@@ -67,17 +69,18 @@ class RotaTemplateSheet:
         self.rT.add_name(name)
         self.sheet.insert_row_position()
         self.sheet.set_index_data(self.rT.names)
-        self.sheet.pack()
+        self.sheet.span(self.sheet.get_total_rows(), None).checkbox(edit_data=True)
 
     def add_role(self, name):
         self.rT.add_role(name)
         self.sheet.insert_column_position()
         self.sheet.set_header_data(self.rT.roles)
-        self.sheet.pack()
+        self.sheet.span(None, self.sheet.get_total_columns()).checkbox(edit_data=True)
 
 class RotaTab(Tab):
     def draw(self):
         names = ["Adam", "Beth", "Charlie", "Dave"]
+        roles = ["Leader"]
         self.addNameButton = Button(self.tab, text="Add Name")
         self.addNameButton.grid(column=0, row=0)
         
@@ -90,7 +93,7 @@ class RotaTab(Tab):
         self.addRoleEntry = ttk.Entry(self.tab)
         self.addRoleEntry.grid(column=3, row=0)
         
-        self.rts = RotaTemplateSheet(self.tab, names)
+        self.rts = RotaTemplateSheet(self.tab, names, roles)
         self.addNameButton.bind("<Button>", self.add_name)
         self.addRoleButton.bind("<Button>", self.add_role)
 
