@@ -17,7 +17,7 @@ class Tab:
         self.tab = ttk.Frame(parent)
 
         self.draw()
-        self.tab.pack()
+        self.tab.pack(expand=1, fill='both')
 
     def draw(self):
         pass
@@ -28,10 +28,11 @@ class TabGroup:
         self.nb = ttk.Notebook(parent)
         self.tabs = []
 
-    def add_tab(self, obj: Tab, *args):
-        tab = obj(self.nb, *args)
+    def add_tab(self, obj: Tab, name):
+        tab = obj(self.nb, name)
         self.tabs.append(tab)
-        self.nb.pack()
+        self.nb.add(tab.tab, text=name)
+        self.nb.pack(expand=1, fill='both')
 
 class RotaTemplate:
     def __init__(self, names=None, roles=None):
@@ -60,7 +61,7 @@ class RotaTemplateSheet:
             height=240
         )
         self.sheet.enable_bindings()
-        self.sheet.pack()
+        self.sheet.grid(row=2, column=0, columnspan=4)
 
     def add_name(self, name):
         self.rT.add_name(name)
@@ -78,18 +79,18 @@ class RotaTab(Tab):
     def draw(self):
         names = ["Adam", "Beth", "Charlie", "Dave"]
         self.addNameButton = Button(self.tab, text="Add Name")
-        self.addNameButton.pack()
+        self.addNameButton.grid(column=0, row=0)
         
         self.addNameEntry = ttk.Entry(self.tab)
-        self.addNameEntry.pack()
+        self.addNameEntry.grid(column=1, row=0)
         
         self.addRoleButton = Button(self.tab, text="Add Role")
-        self.addRoleButton.pack()
+        self.addRoleButton.grid(column=2, row=0)
         
         self.addRoleEntry = ttk.Entry(self.tab)
-        self.addRoleEntry.pack()
+        self.addRoleEntry.grid(column=3, row=0)
         
-        self.rts = RotaTemplateSheet(self.parent, names)
+        self.rts = RotaTemplateSheet(self.tab, names)
         self.addNameButton.bind("<Button>", self.add_name)
         self.addRoleButton.bind("<Button>", self.add_role)
 
@@ -112,13 +113,12 @@ class Window(Tk):
 
         self.tabs = TabGroup(self)
         self.tabs.add_tab(RotaTab, "Rota")
+        self.tabs.add_tab(Tab, "Availability")
 
         # Create Exit button
         self.button = Button(text="Exit")
         self.button.bind("<Button>", self.handle_button_press)
         self.button.pack()
-
-        self.tabs.tabs[0].rts.add_name("Erin")
 
     def handle_button_press(self, event):
         self.destroy()
